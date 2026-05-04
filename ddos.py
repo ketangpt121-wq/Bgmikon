@@ -7,7 +7,7 @@ from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageH
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 
 TOKEN = "8278228198:AAG7C97c7R50_gsykoqBMwesCuoRZTciCLA"
-ADMIN_ID = 6120560770
+ADMIN_ID = 8210011971
 
 attack_active = False
 user_state = {}
