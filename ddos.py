@@ -3,8 +3,8 @@ import time
 import threading
 import random
 import socket
+from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, Filters
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 import cloudscraper
 
 TOKEN = "8278228198:AAG7C97c7R50_gsykoqBMwesCuoRZTciCLA"
