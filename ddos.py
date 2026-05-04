@@ -1,4 +1,3 @@
-cat > ddos.py << 'EOF'
 import requests
 import time
 import threading
